@@ -9,13 +9,14 @@ from sqlalchemy.orm import selectinload
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.database.models import Conversation, Message, MessageType
+from src.database.repositories.base import BaseRepository
 
 
-class ConversationRepository:
+class ConversationRepository(BaseRepository[Conversation]):
     """Repository for Conversation operations."""
     
     def __init__(self, session: AsyncSession):
-        self.session = session
+        super().__init__(session, Conversation)
     
     async def get_by_id(self, conversation_id: uuid.UUID) -> Optional[Conversation]:
         """Get conversation by ID with messages."""
