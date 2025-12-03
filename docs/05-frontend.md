@@ -1,312 +1,166 @@
-# Fase 5: Frontend Vanilla
+# Fase 5: Frontend Vanilla JS
 
-## 📋 Objetivo
+## Descripción
 
-Crear una interfaz web simple usando HTML, CSS y JavaScript vanilla para probar el sistema de chat sin depender de la API de Telegram.
+Interface de chat web moderna usando HTML, CSS y JavaScript vanilla. Permite probar el sistema conversacional sin necesidad de Telegram.
 
----
+## Acceso
 
-## ✅ Checklist
+```
+http://localhost:8000/chat
+```
 
-### 5.1 Estructura HTML
-- [ ] Layout de chat moderno
-- [ ] Input de mensaje
-- [ ] Área de mensajes con scroll
-- [ ] Indicador de "escribiendo..."
-
-### 5.2 Estilos CSS
-- [ ] Diseño responsive
-- [ ] Burbujas de chat diferenciadas
-- [ ] Animaciones suaves
-- [ ] Dark/Light mode
-
-### 5.3 JavaScript
-- [ ] Conexión con API /api/chat
-- [ ] Manejo de sesión (lead_id, conversation_id)
-- [ ] Renderizado de mensajes
-- [ ] Renderizado de propiedades (cards)
-- [ ] Auto-scroll
-
-### 5.4 Funcionalidades
-- [ ] Enviar mensaje con Enter
-- [ ] Mostrar historial de conversación
-- [ ] Mostrar propiedades como cards
-- [ ] Botones de acción (ver más, agendar)
-
----
-
-## 📁 Estructura de Archivos
+## Estructura de Archivos
 
 ```
 frontend/
-├── index.html
+├── index.html          # Página principal
 ├── css/
-│   └── styles.css
+│   └── styles.css      # Estilos (variables CSS, responsive)
 ├── js/
-│   ├── app.js           # Lógica principal
-│   ├── api.js           # Llamadas a la API
-│   └── ui.js            # Renderizado de UI
-└── assets/
-    └── icons/
+│   └── app.js          # Lógica de la aplicación
+└── assets/             # Imágenes y recursos
 ```
 
----
+## Características
 
-## 🎨 Diseño
+### 🎨 Diseño
 
-### Wireframe
+- **Paleta cálida**: Colores terracota/coral para inmobiliaria
+- **Tipografía**: Outfit (Google Fonts)
+- **Responsive**: Adaptable a móvil y desktop
+- **Dark sidebar**: Navegación elegante
 
-```
-┌────────────────────────────────────────────┐
-│  🏠 Pascal Real Estate Assistant           │
-├────────────────────────────────────────────┤
-│                                            │
-│  ┌──────────────────────────────────────┐  │
-│  │ 🤖 ¡Hola! Soy el asistente de       │  │
-│  │    Pascal. ¿En qué puedo ayudarte?  │  │
-│  └──────────────────────────────────────┘  │
-│                                            │
-│          ┌──────────────────────────────┐  │
-│          │ Busco un depa de 2 hab en   │  │
-│          │ Miraflores                   │  │
-│          └──────────────────────────────┘  │
-│                                            │
-│  ┌──────────────────────────────────────┐  │
-│  │ 🤖 ¡Excelente elección! Encontré    │  │
-│  │    estas opciones para ti:          │  │
-│  │                                      │  │
-│  │  ┌────────────┐  ┌────────────┐     │  │
-│  │  │ 🏢 Torre   │  │ 🏢 Ocean  │     │  │
-│  │  │ Pacífico   │  │ View      │     │  │
-│  │  │ 2BR       │  │ 2BR       │     │  │
-│  │  │ $185,000  │  │ $195,000  │     │  │
-│  │  │ [Ver más] │  │ [Ver más] │     │  │
-│  │  └────────────┘  └────────────┘     │  │
-│  └──────────────────────────────────────┘  │
-│                                            │
-├────────────────────────────────────────────┤
-│  [Escribe tu mensaje...          ] [Enviar]│
-└────────────────────────────────────────────┘
-```
+### 💬 Chat
 
----
+- Mensajes con animaciones de entrada
+- Indicador de escritura (typing indicator)
+- Formateo de markdown (bold, listas)
+- Timestamp en cada mensaje
 
-## 🔧 Implementación
+### 🏠 Propiedades
 
-### HTML Base
+- Panel lateral deslizable
+- Cards de propiedad con:
+  - Título y precio
+  - Ubicación
+  - Características (habitaciones, baños, área)
+  - Botones de acción
 
-```html
-<!-- frontend/index.html -->
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pascal Real Estate Assistant</title>
-    <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
-    <div class="chat-container">
-        <header class="chat-header">
-            <h1>🏠 Pascal Real Estate</h1>
-            <p>Asistente Virtual</p>
-        </header>
-        
-        <main class="chat-messages" id="messages">
-            <!-- Messages will be rendered here -->
-        </main>
-        
-        <footer class="chat-input">
-            <input 
-                type="text" 
-                id="messageInput" 
-                placeholder="Escribe tu mensaje..."
-                autocomplete="off"
-            >
-            <button id="sendButton">Enviar</button>
-        </footer>
-    </div>
-    
-    <script src="js/api.js"></script>
-    <script src="js/ui.js"></script>
-    <script src="js/app.js"></script>
-</body>
-</html>
-```
+### ⚡ Acciones Rápidas
 
-### API Client
+- Botones predefinidos para consultas comunes
+- Se ocultan después del primer mensaje
+
+## Arquitectura JavaScript
 
 ```javascript
-// frontend/js/api.js
-const API_BASE = 'http://localhost:8000/api';
+// Estado de la aplicación
+let conversationId = null;  // ID de conversación activa
+let isLoading = false;      // Estado de carga
 
-class ChatAPI {
-    constructor() {
-        this.sessionId = localStorage.getItem('sessionId') || this.generateSessionId();
-        localStorage.setItem('sessionId', this.sessionId);
-    }
-    
-    generateSessionId() {
-        return 'session_' + Math.random().toString(36).substr(2, 9);
-    }
-    
-    async sendMessage(message) {
-        const response = await fetch(`${API_BASE}/chat`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                message: message,
-                session_id: this.sessionId
-            })
-        });
-        
-        if (!response.ok) {
-            throw new Error('Error sending message');
-        }
-        
-        return response.json();
-    }
-    
-    async getConversationHistory() {
-        const response = await fetch(`${API_BASE}/chat/history/${this.sessionId}`);
-        return response.json();
-    }
-}
-
-const chatAPI = new ChatAPI();
+// Flujo de mensaje
+sendMessage(text)
+  → addMessage(text, 'user')      // UI: mensaje del usuario
+  → showTypingIndicator()         // UI: "escribiendo..."
+  → fetch('/api/chat/')           // API call
+  → addMessage(response, 'agent') // UI: respuesta
+  → displayProperties(props)      // UI: panel de propiedades
 ```
 
-### UI Renderer
+## API Utilizada
 
-```javascript
-// frontend/js/ui.js
-class ChatUI {
-    constructor(messagesContainer) {
-        this.container = messagesContainer;
-    }
-    
-    addMessage(content, isUser = false) {
-        const messageDiv = document.createElement('div');
-        messageDiv.className = `message ${isUser ? 'user' : 'assistant'}`;
-        messageDiv.innerHTML = this.formatMessage(content);
-        this.container.appendChild(messageDiv);
-        this.scrollToBottom();
-    }
-    
-    formatMessage(content) {
-        // Handle structured responses with properties
-        if (content.properties && content.properties.length > 0) {
-            return `
-                <p>${content.response}</p>
-                <div class="property-cards">
-                    ${content.properties.map(p => this.renderPropertyCard(p)).join('')}
-                </div>
-            `;
-        }
-        return `<p>${content.response || content}</p>`;
-    }
-    
-    renderPropertyCard(property) {
-        return `
-            <div class="property-card">
-                <h4>${property.title}</h4>
-                <p class="project">${property.project_name}</p>
-                <p class="price">$${property.price_usd?.toLocaleString()}</p>
-                <p class="details">${property.bedrooms} hab · ${property.district}</p>
-                <button onclick="viewProperty('${property.id}')">Ver más</button>
-            </div>
-        `;
-    }
-    
-    showTyping() {
-        const typingDiv = document.createElement('div');
-        typingDiv.className = 'message assistant typing';
-        typingDiv.id = 'typing-indicator';
-        typingDiv.innerHTML = '<span></span><span></span><span></span>';
-        this.container.appendChild(typingDiv);
-        this.scrollToBottom();
-    }
-    
-    hideTyping() {
-        const typing = document.getElementById('typing-indicator');
-        if (typing) typing.remove();
-    }
-    
-    scrollToBottom() {
-        this.container.scrollTop = this.container.scrollHeight;
-    }
+### POST /api/chat/
+
+**Request:**
+```json
+{
+  "message": "Busco un departamento de 2 habitaciones",
+  "channel": "web",
+  "session_id": "uuid-opcional"
 }
 ```
 
-### App Principal
-
-```javascript
-// frontend/js/app.js
-document.addEventListener('DOMContentLoaded', () => {
-    const messagesContainer = document.getElementById('messages');
-    const messageInput = document.getElementById('messageInput');
-    const sendButton = document.getElementById('sendButton');
-    
-    const ui = new ChatUI(messagesContainer);
-    
-    // Welcome message
-    ui.addMessage({
-        response: '¡Hola! 👋 Soy el asistente virtual de Pascal Real Estate. ¿En qué puedo ayudarte hoy? Puedo ayudarte a buscar departamentos, darte información sobre proyectos o agendar una visita.'
-    });
-    
-    async function sendMessage() {
-        const message = messageInput.value.trim();
-        if (!message) return;
-        
-        // Show user message
-        ui.addMessage(message, true);
-        messageInput.value = '';
-        
-        // Show typing indicator
-        ui.showTyping();
-        
-        try {
-            const response = await chatAPI.sendMessage(message);
-            ui.hideTyping();
-            ui.addMessage(response);
-        } catch (error) {
-            ui.hideTyping();
-            ui.addMessage({ response: 'Lo siento, hubo un error. Por favor intenta de nuevo.' });
-        }
+**Response:**
+```json
+{
+  "type": "PROPERTY_SEARCH_RESULT",
+  "response": "Encontré estas opciones...",
+  "properties": [
+    {
+      "id": "uuid",
+      "title": "Depa 2BR Vista Mar",
+      "project_name": "Torre Pacífico",
+      "price_usd": 185000,
+      "bedrooms": 2,
+      "bathrooms": 2,
+      "district": "Miraflores",
+      "area_m2": "65-85"
     }
-    
-    // Event listeners
-    sendButton.addEventListener('click', sendMessage);
-    messageInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') sendMessage();
-    });
-});
+  ],
+  "conversation_id": "uuid"
+}
 ```
 
----
+## CSS Variables
 
-## 🧪 Verificación
-
-```bash
-# 1. Servir frontend (usando Python)
-cd frontend && python -m http.server 3000
-
-# 2. Abrir en navegador
-open http://localhost:3000
-
-# 3. Probar conversaciones:
-#    - "Hola"
-#    - "Busco un departamento de 2 habitaciones en Miraflores"
-#    - "Quiero agendar una visita"
+```css
+:root {
+  /* Colores primarios */
+  --primary-500: #f85a47;    /* Coral principal */
+  --primary-600: #e53e2a;    /* Hover */
+  
+  /* Neutrales */
+  --neutral-100: #f5f5f4;    /* Fondo claro */
+  --neutral-800: #292524;    /* Texto */
+  --neutral-900: #1c1917;    /* Sidebar */
+  
+  /* Acentos */
+  --accent-teal: #0d9488;    /* Usuario */
+  --success: #22c55e;        /* Online */
+}
 ```
 
----
+## Responsive Breakpoints
 
-## 📚 Referencias
+| Breakpoint | Cambios |
+|------------|---------|
+| > 1024px | Layout completo con sidebar y panel |
+| 768-1024px | Panel más estrecho |
+| < 768px | Sin sidebar, panel fullscreen |
 
-- [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
-- [CSS Grid](https://css-tricks.com/snippets/css/complete-guide-grid/)
-- [CSS Animations](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations)
+## Interacciones
 
+### Envío de Mensaje
+1. Usuario escribe mensaje
+2. Click en enviar o Enter
+3. Mensaje aparece en UI (animación)
+4. Typing indicator mientras carga
+5. Respuesta del agente con animación
+
+### Panel de Propiedades
+1. Si la respuesta incluye `properties[]`
+2. Panel se desliza desde la derecha
+3. Cards con información de cada propiedad
+4. Botones: "Más info" y "Agendar visita"
+
+### Limpiar Chat
+1. Click en icono de basura
+2. Se elimina todo excepto mensaje de bienvenida
+3. Se resetea `conversationId`
+4. Vuelven las acciones rápidas
+
+## Pruebas Manuales
+
+1. **Saludo**: "Hola" → Respuesta de bienvenida
+2. **Búsqueda**: "Busco 2 habitaciones en Miraflores" → Propiedades + Panel
+3. **Proyecto**: "Info de Torre Pacífico" → Detalles del proyecto
+4. **Agendar**: "Quiero agendar visita" → Flujo de agendamiento
+
+## Próximos Pasos
+
+- [ ] Soporte para imágenes de propiedades
+- [ ] Historial de conversaciones guardado
+- [ ] Modo oscuro toggle
+- [ ] Notificaciones push
+- [ ] PWA (Progressive Web App)

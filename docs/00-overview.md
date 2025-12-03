@@ -104,9 +104,9 @@ telegram-agent/
 | 1 | [Database & Redis](./01-database.md) | ✅ Completado | Conexiones, repositorios, cache |
 | 2 | [API REST](./02-api.md) | ✅ Completado | Endpoints CRUD FastAPI |
 | 3 | [Seed Data](./03-seed-data.md) | ✅ Completado | Datos de prueba |
-| 4 | [AI Module](./04-ai-module.md) | ⏳ Pendiente | RAG, embeddings, agentes |
-| 5 | [Frontend](./05-frontend.md) | ⏳ Pendiente | UI de chat vanilla |
-| 6 | [Telegram BFF](./06-telegram-bff.md) | ⏳ Pendiente | Integración Telegram |
+| 4 | [AI Module](./04-ai-module.md) | ✅ Completado | RAG, embeddings, agentes (Multi-provider) |
+| 5 | [Frontend](./05-frontend.md) | ✅ Completado | UI de chat vanilla |
+| 6 | [Telegram BFF](./06-telegram-bff.md) | ✅ Completado | Integración Telegram |
 
 ---
 
