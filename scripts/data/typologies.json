@@ -1,0 +1,43 @@
+[
+  {
+    "name": "Studio",
+    "description": "Departamento tipo estudio, ideal para solteros o parejas jóvenes. Espacio abierto con cocina integrada.",
+    "type": "studio",
+    "num_bedrooms": 0,
+    "num_bathrooms": 1,
+    "area_m2": "35-45"
+  },
+  {
+    "name": "1 Dormitorio",
+    "description": "Departamento de un dormitorio con sala-comedor integrado. Perfecto para personas independientes o parejas.",
+    "type": "1BR",
+    "num_bedrooms": 1,
+    "num_bathrooms": 1,
+    "area_m2": "45-60"
+  },
+  {
+    "name": "2 Dormitorios",
+    "description": "Departamento familiar de dos dormitorios con dos baños completos. Ideal para familias pequeñas o parejas que necesitan espacio extra.",
+    "type": "2BR",
+    "num_bedrooms": 2,
+    "num_bathrooms": 2,
+    "area_m2": "65-85"
+  },
+  {
+    "name": "3 Dormitorios",
+    "description": "Amplio departamento de tres dormitorios para familias grandes. Incluye dormitorio principal con baño incorporado.",
+    "type": "3BR",
+    "num_bedrooms": 3,
+    "num_bathrooms": 2,
+    "area_m2": "90-120"
+  },
+  {
+    "name": "4 Dormitorios",
+    "description": "Departamento premium de cuatro dormitorios. Espacios amplios, ideal para familias numerosas que buscan comodidad.",
+    "type": "4BR",
+    "num_bedrooms": 4,
+    "num_bathrooms": 3,
+    "area_m2": "130-160"
+  }
+]
+

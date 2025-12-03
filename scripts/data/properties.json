@@ -1,0 +1,153 @@
+[
+  {
+    "project_name": "Torre Pacífico",
+    "typology_name": "2 Dormitorios",
+    "title": "Depa 2BR Vista Mar - Piso 15",
+    "type": "departamento",
+    "description": "Espectacular departamento de 2 dormitorios con vista panorámica al océano Pacífico. Sala amplia con salida a balcón, cocina equipada con campana extractora, 2 baños completos con acabados de mármol. Dormitorio principal con walk-in closet. Incluye 1 estacionamiento y depósito.",
+    "pricing": 185000,
+    "view_type": "mar",
+    "floor_no": "15"
+  },
+  {
+    "project_name": "Torre Pacífico",
+    "typology_name": "3 Dormitorios",
+    "title": "Penthouse 3BR Terraza Privada",
+    "type": "penthouse",
+    "description": "Exclusivo penthouse de 3 dormitorios en el último piso con terraza privada de 40m². Vista 360° al mar y la ciudad. Acabados de lujo importados, cocina italiana con isla central, sala de estar con doble altura. Incluye 2 estacionamientos y depósito grande.",
+    "pricing": 450000,
+    "view_type": "mar",
+    "floor_no": "20"
+  },
+  {
+    "project_name": "Torre Pacífico",
+    "typology_name": "1 Dormitorio",
+    "title": "Depa 1BR Moderno - Piso 8",
+    "type": "departamento",
+    "description": "Acogedor departamento de 1 dormitorio ideal para profesionales. Diseño moderno con espacios optimizados. Sala-comedor con vista parcial al mar, cocina americana equipada. Incluye estacionamiento.",
+    "pricing": 125000,
+    "view_type": "mar parcial",
+    "floor_no": "8"
+  },
+  {
+    "project_name": "Jardines de Surco",
+    "typology_name": "2 Dormitorios",
+    "title": "Depa 2BR Familiar - Vista Jardín",
+    "type": "departamento",
+    "description": "Departamento ideal para familias jóvenes. 2 dormitorios amplios con closets empotrados, sala-comedor con salida a balcón con vista a las áreas verdes del condominio. Cocina con espacio para lavandería. Acceso directo a juegos infantiles.",
+    "pricing": 135000,
+    "view_type": "jardín",
+    "floor_no": "5"
+  },
+  {
+    "project_name": "Jardines de Surco",
+    "typology_name": "3 Dormitorios",
+    "title": "Depa 3BR Esquinero - Doble Vista",
+    "type": "departamento",
+    "description": "Amplio departamento esquinero de 3 dormitorios con doble orientación. Muy iluminado y ventilado naturalmente. Dormitorio principal con baño incorporado y walk-in closet. Sala de estar independiente. 2 estacionamientos incluidos.",
+    "pricing": 195000,
+    "view_type": "jardín",
+    "floor_no": "8"
+  },
+  {
+    "project_name": "Jardines de Surco",
+    "typology_name": "4 Dormitorios",
+    "title": "Depa 4BR Premium - Piso Alto",
+    "type": "departamento",
+    "description": "El departamento más exclusivo del proyecto. 4 dormitorios, sala de estar, comedor formal, cocina con isla. Dormitorio de servicio con baño. Vista panorámica a las áreas verdes. Incluye 2 estacionamientos y depósito.",
+    "pricing": 285000,
+    "view_type": "panorámica",
+    "floor_no": "12"
+  },
+  {
+    "project_name": "Loft San Isidro",
+    "typology_name": "1 Dormitorio",
+    "title": "Loft Ejecutivo Doble Altura",
+    "type": "loft",
+    "description": "Exclusivo loft de doble altura con diseño contemporáneo. Dormitorio en mezzanine con baño completo. Sala con ventanales de piso a techo. Cocina de diseño con barra desayunadora. Ideal para ejecutivos que buscan estilo de vida moderno.",
+    "pricing": 175000,
+    "view_type": "ciudad",
+    "floor_no": "4"
+  },
+  {
+    "project_name": "Loft San Isidro",
+    "typology_name": "Studio",
+    "title": "Studio Ejecutivo Premium",
+    "type": "studio",
+    "description": "Studio completamente equipado para el ejecutivo moderno. Espacio abierto optimizado con área de trabajo integrada. Cocina americana de diseño, baño completo con acabados de primera. A minutos de los principales centros empresariales.",
+    "pricing": 98000,
+    "view_type": "ciudad",
+    "floor_no": "3"
+  },
+  {
+    "project_name": "Loft San Isidro",
+    "typology_name": "2 Dormitorios",
+    "title": "Loft 2BR Vista Golf",
+    "type": "loft",
+    "description": "Impresionante loft de 2 dormitorios con vista directa al Golf de San Isidro. Techos de 5 metros, ventanales panorámicos. Dormitorio principal en mezzanine con walking closet. Segundo dormitorio en primer nivel. Acabados premium incluidos.",
+    "pricing": 295000,
+    "view_type": "golf",
+    "floor_no": "6"
+  },
+  {
+    "project_name": "Residencial Barranco",
+    "typology_name": "1 Dormitorio",
+    "title": "Depa 1BR Artístico - Estilo Barranco",
+    "type": "departamento",
+    "description": "Departamento con personalidad única que refleja el espíritu de Barranco. 1 dormitorio con diseño de interiores incluido. Balcón con vista a la calle bohemia. A pasos de galerías, bares y restaurantes. Pet-friendly.",
+    "pricing": 115000,
+    "view_type": "calle",
+    "floor_no": "4"
+  },
+  {
+    "project_name": "Residencial Barranco",
+    "typology_name": "2 Dormitorios",
+    "title": "Depa 2BR Terraza Vista Mar",
+    "type": "departamento",
+    "description": "Hermoso departamento de 2 dormitorios con amplia terraza y vista al mar. Diseño que combina lo moderno con detalles artísticos. Sala-comedor integrada, cocina con espacio para isla. Ideal para parejas o roommates.",
+    "pricing": 165000,
+    "view_type": "mar",
+    "floor_no": "7"
+  },
+  {
+    "project_name": "Residencial Barranco",
+    "typology_name": "Studio",
+    "title": "Studio Bohemio - Piso Bajo",
+    "type": "studio",
+    "description": "Encantador studio en el corazón de Barranco. Espacio versátil con techos altos. Perfecto como primera vivienda o inversión para alquiler. Alta demanda en la zona por turismo y vida nocturna.",
+    "pricing": 85000,
+    "view_type": "interior",
+    "floor_no": "2"
+  },
+  {
+    "project_name": "Vista Verde Magdalena",
+    "typology_name": "2 Dormitorios",
+    "title": "Depa 2BR Eco-Friendly",
+    "type": "departamento",
+    "description": "Departamento sustentable de 2 dormitorios. Iluminación LED, griferías ahorradoras, ventanas con doble vidrio. Vista a las áreas verdes con huertos urbanos. Ahorro de hasta 30% en servicios básicos.",
+    "pricing": 125000,
+    "view_type": "jardín",
+    "floor_no": "6"
+  },
+  {
+    "project_name": "Vista Verde Magdalena",
+    "typology_name": "3 Dormitorios",
+    "title": "Depa 3BR Familiar Verde",
+    "type": "departamento",
+    "description": "Amplio departamento familiar con enfoque ecológico. 3 dormitorios bien distribuidos, sala-comedor con doble altura en algunos niveles. Acceso a huerto urbano asignado. Certificación LEED en proceso.",
+    "pricing": 175000,
+    "view_type": "parque",
+    "floor_no": "9"
+  },
+  {
+    "project_name": "Vista Verde Magdalena",
+    "typology_name": "1 Dormitorio",
+    "title": "Depa 1BR Compacto Sustentable",
+    "type": "departamento",
+    "description": "Departamento compacto pero funcional de 1 dormitorio. Diseño inteligente que maximiza cada metro cuadrado. Perfecto para jóvenes profesionales conscientes del medio ambiente. Cerca de Costa Verde para ciclistas.",
+    "pricing": 95000,
+    "view_type": "lateral",
+    "floor_no": "4"
+  }
+]
+

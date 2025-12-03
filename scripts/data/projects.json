@@ -1,0 +1,63 @@
+[
+  {
+    "name": "Torre Pacífico",
+    "description": "Moderno edificio residencial de 20 pisos con impresionante vista al océano Pacífico. Acabados de primera calidad, áreas comunes premium incluyendo piscina infinity, gimnasio equipado, zona de parrillas con vista al mar y salón de eventos. Ubicación privilegiada a pasos del Malecón de Miraflores.",
+    "district": "Miraflores",
+    "address": "Av. Malecón de la Reserva 1234",
+    "reference": "Frente al Parque del Amor, a 2 cuadras de Larcomar",
+    "details": "Entrega inmediata. Financiamiento directo disponible hasta 20 años. Departamentos desde 65m² hasta 180m².",
+    "video_url": "https://youtube.com/watch?v=torre-pacifico",
+    "brochure_url": "https://pascal.pe/brochures/torre-pacifico.pdf",
+    "includes_parking": true,
+    "has_showroom": true
+  },
+  {
+    "name": "Jardines de Surco",
+    "description": "Exclusivo condominio residencial con más de 5,000m² de áreas verdes. Diseñado para familias que valoran la tranquilidad y seguridad. Cuenta con club house, piscina, juegos para niños, cancha de tenis y amplio estacionamiento de visitas. Seguridad 24/7 con control de acceso biométrico.",
+    "district": "Santiago de Surco",
+    "address": "Av. El Polo 567",
+    "reference": "A 2 cuadras del Jockey Plaza, cerca al colegio Newton",
+    "details": "Proyecto en construcción. Entrega programada para diciembre 2025. Precios de pre-venta con descuentos especiales.",
+    "video_url": "https://youtube.com/watch?v=jardines-surco",
+    "brochure_url": "https://pascal.pe/brochures/jardines-surco.pdf",
+    "includes_parking": true,
+    "has_showroom": true
+  },
+  {
+    "name": "Loft San Isidro",
+    "description": "Edificio boutique de solo 8 pisos con diseño arquitectónico contemporáneo. Lofts de doble altura con grandes ventanales que maximizan la luz natural. Ubicación premium en el corazón financiero de Lima, ideal para ejecutivos y profesionales que buscan vivir cerca de su trabajo.",
+    "district": "San Isidro",
+    "address": "Calle Los Laureles 890",
+    "reference": "A una cuadra del Golf de San Isidro, zona financiera",
+    "details": "Últimas 5 unidades disponibles. Acabados de lujo incluidos. Cocina italiana y pisos de porcelanato importado.",
+    "video_url": "https://youtube.com/watch?v=loft-san-isidro",
+    "brochure_url": "https://pascal.pe/brochures/loft-san-isidro.pdf",
+    "includes_parking": true,
+    "has_showroom": false
+  },
+  {
+    "name": "Residencial Barranco",
+    "description": "Vive en el distrito más bohemio de Lima. Edificio de diseño que combina arquitectura moderna con el espíritu artístico de Barranco. A pasos de galerías, restaurantes y la vida nocturna. Terraza común con vista al mar y zona de coworking para residentes.",
+    "district": "Barranco",
+    "address": "Av. Grau 445",
+    "reference": "A 3 cuadras del Puente de los Suspiros, cerca a MATE",
+    "details": "Proyecto nuevo. Lanzamiento con precios especiales. Departamentos pet-friendly.",
+    "video_url": "https://youtube.com/watch?v=residencial-barranco",
+    "brochure_url": "https://pascal.pe/brochures/residencial-barranco.pdf",
+    "includes_parking": true,
+    "has_showroom": true
+  },
+  {
+    "name": "Vista Verde Magdalena",
+    "description": "Condominio eco-friendly con paneles solares y sistema de reciclaje de agua. Amplias áreas verdes con huertos urbanos para residentes. Excelente conectividad por Costa Verde y cercanía al mar. Ideal para familias conscientes del medio ambiente.",
+    "district": "Magdalena del Mar",
+    "address": "Av. Brasil 2890",
+    "reference": "Cerca al Parque de los Próceres, a 5 min de Costa Verde",
+    "details": "Certificación LEED en proceso. Ahorro de hasta 30% en servicios. Entrega 2025.",
+    "video_url": "https://youtube.com/watch?v=vista-verde",
+    "brochure_url": "https://pascal.pe/brochures/vista-verde.pdf",
+    "includes_parking": true,
+    "has_showroom": true
+  }
+]
+
