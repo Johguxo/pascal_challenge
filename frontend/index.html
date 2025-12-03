@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pascal Real Estate | Asistente Inmobiliario</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <span class="logo-icon">🏢</span>
+                    <span class="logo-text">Pascal</span>
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active">
+                    <span class="nav-icon">💬</span>
+                    <span>Chat</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <span class="nav-icon">🏠</span>
+                    <span>Propiedades</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <span class="nav-icon">📅</span>
+                    <span>Mis Citas</span>
+                </a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="status-indicator">
+                    <span class="status-dot online"></span>
+                    <span>Agente Online</span>
+                </div>
+            </div>
+        </aside>
+        
+        <!-- Main Chat Area -->
+        <main class="chat-container">
+            <!-- Chat Header -->
+            <header class="chat-header">
+                <div class="chat-header-info">
+                    <div class="avatar agent-avatar">
+                        <span>🤖</span>
+                    </div>
+                    <div class="header-text">
+                        <h1>Pascal AI</h1>
+                        <p>Tu asistente inmobiliario en Lima</p>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <button class="btn-icon" id="clearChat" title="Limpiar chat">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
+                        </svg>
+                    </button>
+                </div>
+            </header>
+            
+            <!-- Messages Area -->
+            <div class="messages-container" id="messagesContainer">
+                <div class="messages-wrapper" id="messagesWrapper">
+                    <!-- Welcome message -->
+                    <div class="message-group agent">
+                        <div class="message-avatar">
+                            <span>🤖</span>
+                        </div>
+                        <div class="message-content">
+                            <div class="message">
+                                <p>¡Hola! 👋 Soy <strong>Pascal</strong>, tu asistente inmobiliario.</p>
+                                <p>Puedo ayudarte a:</p>
+                                <ul>
+                                    <li>🏠 Buscar departamentos en Lima</li>
+                                    <li>📋 Darte información sobre proyectos</li>
+                                    <li>📅 Agendar visitas</li>
+                                </ul>
+                                <p>¿En qué puedo ayudarte hoy?</p>
+                            </div>
+                            <span class="message-time">Ahora</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Quick Actions -->
+            <div class="quick-actions" id="quickActions">
+                <button class="quick-action" data-message="Busco un departamento de 2 habitaciones">
+                    🔍 Buscar 2 habitaciones
+                </button>
+                <button class="quick-action" data-message="¿Qué proyectos tienen en Miraflores?">
+                    📍 Proyectos en Miraflores
+                </button>
+                <button class="quick-action" data-message="Quiero agendar una visita">
+                    📅 Agendar visita
+                </button>
+            </div>
+            
+            <!-- Input Area -->
+            <div class="input-container">
+                <form id="chatForm" class="chat-form">
+                    <div class="input-wrapper">
+                        <input 
+                            type="text" 
+                            id="messageInput" 
+                            placeholder="Escribe tu mensaje..." 
+                            autocomplete="off"
+                            autofocus
+                        >
+                        <button type="submit" class="send-button" id="sendButton">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </form>
+                <p class="input-hint">Presiona Enter para enviar</p>
+            </div>
+        </main>
+        
+        <!-- Properties Panel (slides in) -->
+        <aside class="properties-panel" id="propertiesPanel">
+            <div class="panel-header">
+                <h2>Propiedades Encontradas</h2>
+                <button class="btn-icon close-panel" id="closePanel">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6L6 18M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="panel-content" id="propertiesList">
+                <!-- Properties will be inserted here -->
+            </div>
+        </aside>
+    </div>
+    
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+    </div>
+    
+    <script src="js/app.js"></script>
+</body>
+</html>
+
