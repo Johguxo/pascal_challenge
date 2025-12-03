@@ -20,6 +20,12 @@ from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 from pgvector.sqlalchemy import Vector
 
+from src.config import get_settings
+
+# Get embedding dimensions from config
+# 768 for Gemini, 1536 for OpenAI
+EMBEDDING_DIMENSIONS = get_settings().embedding_dimensions
+
 
 class Base(DeclarativeBase):
     """Base class for all models."""
@@ -85,8 +91,8 @@ class Project(Base):
     includes_parking: Mapped[Optional[bool]] = mapped_column(Boolean, default=False)
     has_showroom: Mapped[Optional[bool]] = mapped_column(Boolean, default=False)
     
-    # Embedding for RAG
-    embedding: Mapped[Optional[List[float]]] = mapped_column(Vector(1536), nullable=True)
+    # Embedding for RAG (dimensions: 768 for Gemini, 1536 for OpenAI)
+    embedding: Mapped[Optional[List[float]]] = mapped_column(Vector(EMBEDDING_DIMENSIONS), nullable=True)
     
     # Relationships
     properties: Mapped[List["Property"]] = relationship(back_populates="project")
@@ -142,8 +148,8 @@ class Property(Base):
         nullable=True
     )
     
-    # Embedding for RAG
-    embedding: Mapped[Optional[List[float]]] = mapped_column(Vector(1536), nullable=True)
+    # Embedding for RAG (dimensions: 768 for Gemini, 1536 for OpenAI)
+    embedding: Mapped[Optional[List[float]]] = mapped_column(Vector(EMBEDDING_DIMENSIONS), nullable=True)
     
     # Relationships
     project: Mapped[Optional["Project"]] = relationship(back_populates="properties")
@@ -207,7 +213,12 @@ class Message(Base):
         default=uuid.uuid4
     )
     type: Mapped[MessageType] = mapped_column(
-        Enum(MessageType, name="message_type", create_type=False),
+        Enum(
+            MessageType, 
+            name="message_type", 
+            create_type=False,
+            values_callable=lambda e: [member.value for member in e]
+        ),
         nullable=False
     )
     content: Mapped[str] = mapped_column(Text, nullable=False)
