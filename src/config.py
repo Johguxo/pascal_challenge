@@ -11,6 +11,7 @@ class Settings(BaseSettings):
     
     # Telegram
     telegram_bot_token: str = ""
+    telegram_webhook_secret: str = ""  # Optional secret for webhook verification
     
     # AI Providers
     # OpenAI

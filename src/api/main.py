@@ -2,10 +2,16 @@
 FastAPI application main entry point.
 """
 from contextlib import asynccontextmanager
+from pathlib import Path
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 
 from src.config import get_settings
+
+# Get frontend directory path
+FRONTEND_DIR = Path(__file__).parent.parent.parent / "frontend"
 from src.database.connection import init_db
 from src.cache import get_redis_client
 from src.api.routes import (
@@ -18,6 +24,7 @@ from src.api.routes import (
     appointments,
     chat,
 )
+from src.bff.telegram.router import router as telegram_router
 
 settings = get_settings()
 
@@ -59,6 +66,7 @@ app = FastAPI(
     * **Typologies** - Tipos de propiedades
     * **Appointments** - Citas y visitas
     * **Chat** - Endpoint principal de conversación
+    * **Telegram** - Webhook para Telegram Bot
     """,
     version="1.0.0",
     lifespan=lifespan,
@@ -82,6 +90,7 @@ app.include_router(properties.router, prefix="/api/properties", tags=["Propertie
 app.include_router(typologies.router, prefix="/api/typologies", tags=["Typologies"])
 app.include_router(appointments.router, prefix="/api/appointments", tags=["Appointments"])
 app.include_router(chat.router, prefix="/api/chat", tags=["Chat"])
+app.include_router(telegram_router, prefix="/telegram", tags=["Telegram"])
 
 
 @app.get("/")
@@ -106,4 +115,19 @@ async def health_check():
         "database": "connected",
         "redis": "connected" if redis_ok else "disconnected",
     }
+
+
+# Serve frontend static files
+if FRONTEND_DIR.exists():
+    # Mount static directories
+    app.mount("/css", StaticFiles(directory=FRONTEND_DIR / "css"), name="css")
+    app.mount("/js", StaticFiles(directory=FRONTEND_DIR / "js"), name="js")
+    
+    if (FRONTEND_DIR / "assets").exists():
+        app.mount("/assets", StaticFiles(directory=FRONTEND_DIR / "assets"), name="assets")
+    
+    @app.get("/chat")
+    async def serve_chat():
+        """Serve the chat frontend."""
+        return FileResponse(FRONTEND_DIR / "index.html")
 
