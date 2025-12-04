@@ -113,6 +113,37 @@ class RAGSearchService:
         
         return results
     
+    async def get_property_by_id(self, property_id: UUID) -> Optional[Dict[str, Any]]:
+        """
+        Get a single property by its ID.
+        
+        Args:
+            property_id: UUID of the property
+            
+        Returns:
+            Property dictionary or None if not found
+        """
+        prop = await self.property_repo.get_by_id_with_relations(property_id)
+        
+        if not prop:
+            return None
+        
+        return {
+            "id": str(prop.id),
+            "title": prop.title,
+            "type": prop.type,
+            "description": prop.description,
+            "price_usd": prop.pricing,
+            "view_type": prop.view_type,
+            "floor": prop.floor_no,
+            "project_id": str(prop.project_id) if prop.project_id else None,
+            "project_name": prop.project.name if prop.project else None,
+            "district": prop.project.district if prop.project else None,
+            "bedrooms": prop.typology.num_bedrooms if prop.typology else None,
+            "bathrooms": prop.typology.num_bathrooms if prop.typology else None,
+            "area_m2": prop.typology.area_m2 if prop.typology else None,
+        }
+    
     async def get_project_by_name(self, name: str) -> Optional[Dict[str, Any]]:
         """Get project by name (partial match)."""
         project = await self.project_repo.get_by_name(name)

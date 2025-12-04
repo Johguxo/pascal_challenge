@@ -81,10 +81,8 @@ class ChatService:
         
         # 3. Get conversation history from cache
         history = await self.conv_cache.get_history_for_llm(str(conversation.id))
-        
         # 4. Classify intent
         intent = await self.orchestrator.route(message, history)
-        
         # 5. Route to appropriate agent
         if intent == Intent.ONBOARDING_SMALL_TALK:
             result = await self._handle_onboarding(
@@ -213,27 +211,36 @@ class ChatService:
             )
         
         properties = result.get("properties", [])
-        
-        return {
-            "type": "PROPERTY_SEARCH_RESULT",
-            "response": result["response"],
-            "summary": f"Encontré {len(properties)} propiedades" if properties else None,
-            "properties": [
-                {
-                    "id": p.get("id"),
-                    "title": p.get("title"),
-                    "project_name": p.get("project_name"),
-                    "price_usd": p.get("price_usd"),
-                    "bedrooms": p.get("bedrooms"),
-                    "bathrooms": p.get("bathrooms"),
-                    "district": p.get("district"),
-                    "floor": p.get("floor"),
-                    "area_m2": p.get("area_m2"),
-                }
-                for p in properties
-            ],
-            "suggested_actions": ["agendar_visita", "ver_mas_opciones"],
-        }
+        is_property_info = result.get("from") == "PROPERTY_INFO"
+        if is_property_info:
+            return {
+                "type": "PROPERTY_SEARCH_RESULT",
+                "summary": None,
+                "response": result["response"],
+                "properties": None,
+                "suggested_actions": ["agendar_visita", "ver_mas_opciones"],
+            }
+        else:
+            return {
+                "type": "PROPERTY_SEARCH_RESULT",
+                "response": result["response"],
+                "summary": f"Encontré {len(properties)} propiedades" if properties else None,
+                "properties": [
+                    {
+                        "id": p.get("id"),
+                        "title": p.get("title"),
+                        "project_name": p.get("project_name"),
+                        "price_usd": p.get("price_usd"),
+                        "bedrooms": p.get("bedrooms"),
+                        "bathrooms": p.get("bathrooms"),
+                        "district": p.get("district"),
+                        "floor": p.get("floor"),
+                        "area_m2": p.get("area_m2"),
+                    }
+                    for p in properties
+                ],
+                "suggested_actions": ["agendar_visita", "ver_mas_opciones"],
+            }
     
     async def _handle_schedule(
         self,

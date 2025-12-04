@@ -11,6 +11,8 @@ from src.bff.telegram.keyboards import (
     create_property_keyboard,
     create_schedule_keyboard,
     create_main_menu_keyboard,
+    create_suggested_actions_keyboard,
+    create_schedule_time_keyboard,
 )
 from src.ai.chat_service import ChatService
 from src.database.connection import get_async_session
@@ -194,7 +196,6 @@ También puedes escribirme directamente lo que necesitas. Por ejemplo:
             action, value = data.split(":", 1)
         else:
             action, value = data, ""
-        
         # Route to appropriate handler
         if action == "property":
             await self._handle_property_callback(chat_id, value, user)
@@ -267,7 +268,7 @@ También puedes escribirme directamente lo que necesitas. Por ejemplo:
         await self.bot.send_message(
             chat_id=chat_id,
             text=f"📅 Seleccionaste *{day_text}*. ¿A qué hora te gustaría la visita?",
-            reply_markup=create_schedule_keyboard(),
+            reply_markup=create_schedule_time_keyboard(),
         )
     
     async def _handle_time_callback(
@@ -282,7 +283,7 @@ También puedes escribirme directamente lo que necesitas. Por ejemplo:
         async with get_async_session() as session:
             chat_service = ChatService(session)
             result = await chat_service.process_message(
-                message=f"Quiero agendar una visita mañana a las {time_text}",
+                message=f"Quiero agendar una visita a las {time_text}",
                 channel="telegram",
                 channel_user_id=str(user.id),
             )
@@ -380,6 +381,10 @@ También puedes escribirme directamente lo que necesitas. Por ejemplo:
         if properties and len(properties) > 0:
             keyboard = create_property_keyboard(properties)
         
+        suggested_actions = result.get("suggested_actions")
+        if suggested_actions and len(suggested_actions) > 0 and not keyboard and result.get("type") == "PROPERTY_SEARCH_RESULT":
+            keyboard = create_suggested_actions_keyboard(suggested_actions)
+        
         # Send message
         try:
             await self.bot.send_message(
@@ -399,14 +404,18 @@ También puedes escribirme directamente lo que necesitas. Por ejemplo:
             )
         
         # If there's an appointment confirmation, send it separately
-        appointment = result.get("appointment")
+        """appointment = result.get("appointment")
         if appointment:
+            print('Sending appointment: ')
+            print(appointment)
             apt_text = self.formatter.format_appointment(appointment)
+            print('Appointment text: ')
+            print(apt_text)
             await self.bot.send_message(
                 chat_id=chat_id,
                 text=apt_text,
                 parse_mode="MarkdownV2",
-            )
+            )"""
     
     async def _send_error(self, chat_id: int) -> None:
         """Send error message."""

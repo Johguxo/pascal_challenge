@@ -94,6 +94,27 @@ def create_property_keyboard(properties: List[Dict[str, Any]]) -> Dict[str, Any]
     
     return keyboard.build()
 
+def create_suggested_actions_keyboard(suggested_actions: List[str]) -> Dict[str, Any]:
+    """Create keyboard for suggested actions."""
+    keyboard = InlineKeyboard()
+    
+    for action in suggested_actions:
+        if action == "agendar_visita":
+            keyboard.add_button("📅 Agendar visita", callback_data="action:schedule")
+        elif action == "ver_mas_opciones":
+            keyboard.add_button("🔍 Más opciones", callback_data="action:more_options")
+    
+    return keyboard.build()
+
+def create_schedule_time_keyboard() -> Dict[str, Any]:
+    """Create keyboard for scheduling time options."""
+    keyboard = InlineKeyboard()
+    
+    keyboard.add_button("🌅 Mañana (10am)", callback_data="time:morning")
+    keyboard.add_button("☀️ Tarde (3pm)", callback_data="time:afternoon")
+    keyboard.new_row()
+    
+    return keyboard.build()
 
 def create_schedule_keyboard() -> Dict[str, Any]:
     """Create keyboard for scheduling options."""
@@ -102,11 +123,6 @@ def create_schedule_keyboard() -> Dict[str, Any]:
     # Day options
     keyboard.add_button("📅 Mañana", callback_data="schedule:tomorrow")
     keyboard.add_button("📅 Pasado mañana", callback_data="schedule:day_after")
-    keyboard.new_row()
-    
-    # Time options
-    keyboard.add_button("🌅 Mañana (10am)", callback_data="time:morning")
-    keyboard.add_button("☀️ Tarde (3pm)", callback_data="time:afternoon")
     keyboard.new_row()
     
     keyboard.add_button("❌ Cancelar", callback_data="action:cancel")
